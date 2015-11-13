@@ -6,21 +6,28 @@
 3. LOOP 
     -Player 1 turn
     -Player 2 turn
-4. Player 1 WIN, Player 2 WIN, TIE
+4. Player 1 WIN or Player 2 WIN or TIE
 
 ##CLASSES:
 #####View
   -```#welcome``` (STDOUT: introduction statement)
-  -```#map_setup_players``` (INPUT: array of marker symbols STDIN: retrieve game type from user OUTPUT: an enumerable with an array of booleans representative of player types)
+  -```#get_game_type``` (STDIN: retrieve game type from user OUTPUT: an array of booleans representative of player types)
   -```#choose_marker``` (INPUT: array of marker choices STDIN: retrieve marker choice from user OUTPUT: marker choice)
+  -```#try_again``` (STDOUT: try again message)
+  -```#get_move``` (STDIN: player move choice OUTPUT: char representative of player move choice)
 
 #####Computer
   -```#choose_marker``` (INPUT: array of marker choices OUTPUT: marker choice)
+  -```#get_move``` (INPUT: board state OUTPUT: char representative of computer move choice)
 
 #####Player
   Attributes:
   -```@human?``` (boolean)  
   -```@marker``` (char)
+
+  Methods:
+  -```#set_marker``` (INPUT: array of marker choices, decision_proc SIDE-EFFECT: set @maker for player object)
+  -```#choose_move``` (INPUT: decision_proc OUTPUT: Key Value pair of player move choice and marker)
 
 #####Board
   Attributes:
@@ -29,6 +36,7 @@
   
   Methods:
   -```#game_over?``` (OUTPUT: boolean)
+  -```#until_valid_move?``` (INPUT: try again action, player turn, SIDE-EFFECT: runs player turn until valid move OUTPUT: valid move)
   [private]
   -```#tie?``` (OUTPUT: boolean SIDE-EFFECT: change @win_status)
   -```#win?``` (OUTPUT: boolean SIDE-EFFECT: change @win_status)
