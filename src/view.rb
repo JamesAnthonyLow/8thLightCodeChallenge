@@ -18,12 +18,25 @@ module View
         when "3"
           return [false, false]
         else
-          puts "Invalid selection"
+          puts "Invalid selection!"
+        end
+      end
+    end
+    def choose_marker markers
+      loop do
+        puts "Please make marker choice"
+        choices = markers.each_with_index.with_object({}) do |(marker, i), chs|
+          puts "\t#{i+1}. #{marker}"
+          chs["#{i+1}"] = marker
+        end
+        marker_choice = gets.chomp
+        if choices[marker_choice]
+          return markers.delete(choices[marker_choice])
+        else
+          puts "Invalid selection!"
         end
       end
     end
   end
 end
 
-View.welcome
-View.get_game_type
