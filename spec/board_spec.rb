@@ -1,9 +1,9 @@
 require 'spec_helper'
 describe Board do
-  let(:board) { Array.new(9) }
+  let(:board) { Board.new }
   describe "@spaces" do
     it "has length of 9" do
-      expect(board.length).to eq 9
+      expect(board.spaces.length).to eq 9
     end
   end
   describe "@win_status" do
@@ -31,7 +31,14 @@ describe Board do
     end
   end
   describe "#until_valid_move?" do
-    xit "loops until valid input selected" do
+    context "loops until valid input selected" do
+      it "outputs move, marker hash" do 
+        try_again = -> { puts "try again!" }
+        move = board.until_valid_move?(try_again) do
+          [0, "X"] 
+        end
+        expect(move).to eq Hash[:move, 0, :marker, "X"]
+      end
     end
   end
 end

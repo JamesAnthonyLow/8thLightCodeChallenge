@@ -37,7 +37,7 @@
   
   Methods:
   -```#game_over?``` (OUTPUT: boolean)
-  -```#until_valid_move?``` (INPUT: try again action, player turn, SIDE-EFFECT: runs player turn until valid move OUTPUT: valid move)
+  -```#until_valid_move?``` (INPUT: try again action, player turn, SIDE-EFFECT: runs player turn until valid move OUTPUT: valid move hash)
   [private]
   -```#tie?``` (OUTPUT: boolean SIDE-EFFECT: change @win_status)
   -```#winner?``` (INPUT: marker OUTPUT: boolean SIDE-EFFECT: change @win_status)

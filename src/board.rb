@@ -16,7 +16,13 @@ class Board
       tie? 
     end
   end
-  def until_valid_move?
+  def until_valid_move? try_again, &choose_move
+    move, marker = nil
+    loop do 
+      move, marker = choose_move.call
+      return Hash[:move, move, :marker, marker] if valid_move? move
+      try_again.call
+    end
   end
   private 
   def tie?
@@ -24,5 +30,8 @@ class Board
   end
   def winner? marker
     @possible_wins.any? {|line| line.all? {|idx| spaces[idx] == marker}}
+  end
+  def valid_move? move
+    (0..@spaces.length).to_a.include?(move) && !@spaces[move]
   end
 end
