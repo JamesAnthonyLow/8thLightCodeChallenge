@@ -3,6 +3,12 @@ module View
     def welcome
       puts "Welcome to Tic Tac Toe!"
     end
+    def try_again
+      puts "Invalid selection, please try again"
+    end
+    def get_move
+      gets.chomp
+    end
     def get_game_type
       loop do
         puts "Please select game type:"
@@ -18,7 +24,7 @@ module View
         when "3"
           return [false, false]
         else
-          puts "Invalid selection!"
+          try_again
         end
       end
     end
@@ -33,10 +39,9 @@ module View
         if choices[marker_choice]
           return markers.delete(choices[marker_choice])
         else
-          puts "Invalid selection!"
+          try_again
         end
       end
     end
   end
 end
-
