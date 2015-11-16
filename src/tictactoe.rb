@@ -1,3 +1,4 @@
+require_relative "view"
 class TicTacToe
   def initialize
     @board = Board.new
@@ -9,6 +10,7 @@ class TicTacToe
   end
   def start_game
     @players.cycle do |player|
+      View.display_board @board.spaces
       move = @board.until_valid_move?(View.try_again) do
         player.choose_move -> {human? ? View.get_move : Computer.get_move(@board.spaces)}  
       end

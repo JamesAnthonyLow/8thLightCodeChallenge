@@ -15,7 +15,8 @@
   -```#choose_marker``` (INPUT: array of marker choices STDIN: retrieve marker choice from user OUTPUT: marker choice)
   -```#try_again``` (STDOUT: try again message)
   -```#get_move``` (STDIN: player move choice OUTPUT: char representative of player move choice)
-
+  -```#display_board``` (INPUT: string representation of board STDOUT: printout of board)
+ 
 #####Computer
   -```#choose_marker``` (INPUT: array of marker choices OUTPUT: marker choice)
   -```#get_move``` (INPUT: board state OUTPUT: char representative of computer move choice)
@@ -31,7 +32,7 @@
 
 #####Board
   Attributes:
-  -```@spaces``` (Array(9)) w/ attr_accessor
+  -```@spaces``` (Array(9)) w/ attr_reader
   -```@win_status``` (String representing win status) w/ attr_reader
   
   Methods:
@@ -39,7 +40,7 @@
   -```#until_valid_move?``` (INPUT: try again action, player turn, SIDE-EFFECT: runs player turn until valid move OUTPUT: valid move)
   [private]
   -```#tie?``` (OUTPUT: boolean SIDE-EFFECT: change @win_status)
-  -```#win?``` (OUTPUT: boolean SIDE-EFFECT: change @win_status)
+  -```#winner``` (INPUT: marker OUTPUT: boolean SIDE-EFFECT: change @win_status)
 
 #####TicTacToe (controller)
   Attributes:
