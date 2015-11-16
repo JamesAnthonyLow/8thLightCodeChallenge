@@ -6,7 +6,7 @@ class TicTacToe
     View.welcome
     @players = View.get_game_type {|human| Player.new human}
     @players.each_with_object(["X", "O"]) do |player, markers|
-      player.set_marker markers, -> {human? ? View.choose_marker : Computer.choose_marker}
+      player.set_marker -> {human? ? View.choose_marker(markers) : Computer.choose_marker(markers)}
     end
   end
   def start_game
