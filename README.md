@@ -27,7 +27,7 @@
   -```@marker``` (char)
 
   Methods:
-  -```#set_marker``` (INPUT: array of marker choices, decision_proc SIDE-EFFECT: set @maker for player object)
+  -```#set_marker``` (INPUT: array of marker choices, decision_proc SIDE-EFFECT: set @marker for player object)
   -```#choose_move``` (INPUT: decision_proc OUTPUT: Key Value pair of player move choice and marker)
 
 #####Board
