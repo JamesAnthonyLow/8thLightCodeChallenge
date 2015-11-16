@@ -8,6 +8,13 @@ class Board
                       [0, 4, 8], [2, 4, 6]]
   end
   def game_over?
+    if winner? "X"
+      @win_status = "Player X wins!"
+    elsif winner? "O"
+      @win_status = "Player O wins!"
+    else
+      tie? 
+    end
   end
   def until_valid_move?
   end
@@ -15,7 +22,7 @@ class Board
   def tie?
     spaces.all? #full
   end
-  def winner marker
+  def winner? marker
     @possible_wins.any? {|line| line.all? {|idx| spaces[idx] == marker}}
   end
 end

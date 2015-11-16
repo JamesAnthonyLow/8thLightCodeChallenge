@@ -40,7 +40,7 @@
   -```#until_valid_move?``` (INPUT: try again action, player turn, SIDE-EFFECT: runs player turn until valid move OUTPUT: valid move)
   [private]
   -```#tie?``` (OUTPUT: boolean SIDE-EFFECT: change @win_status)
-  -```#winner``` (INPUT: marker OUTPUT: boolean SIDE-EFFECT: change @win_status)
+  -```#winner?``` (INPUT: marker OUTPUT: boolean SIDE-EFFECT: change @win_status)
 
 #####TicTacToe (controller)
   Attributes:
