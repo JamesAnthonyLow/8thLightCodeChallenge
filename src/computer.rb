@@ -4,7 +4,7 @@ module Computer
       markers.sample
     end
     def get_move spaces
-      spaces.select(&:nil?).sample
+      spaces.each_index.with_object([]) {|i, poss| poss << i if spaces[i].nil? }.sample
     end
   end
 end

@@ -1,5 +1,5 @@
 class Board
-  attr_reader :spaces, :reader
+  attr_reader :spaces, :win_status
   def initialize
     @spaces = Array.new(9)
     @win_status = false
@@ -24,9 +24,12 @@ class Board
       try_again.call
     end
   end
+  def place player_move = {}
+    @spaces[player_move[:move]] = player_move[:marker]
+  end
   private 
   def tie?
-    spaces.all? #full
+    spaces.all? ? @win_status = "Tie!" : false
   end
   def winner? marker
     @possible_wins.any? {|line| line.all? {|idx| spaces[idx] == marker}}

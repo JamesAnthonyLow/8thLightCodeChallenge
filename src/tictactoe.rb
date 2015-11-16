@@ -8,14 +8,14 @@ class TicTacToe
     View.welcome
     @players = View.get_game_type {|human| Player.new human}
     @players.each_with_object(["X", "O"]) do |player, markers|
-      player.set_marker -> {@human ? View.choose_marker(markers) : Computer.choose_marker(markers)}
+      player.set_marker {|human| human ? View.choose_marker(markers) : Computer.choose_marker(markers)}
     end
   end
   def start_game
     @players.cycle do |player|
       View.display_board @board.spaces
       move = @board.until_valid_move?(-> { View.try_again }) do
-        player.choose_move -> {@human ? View.get_move : Computer.get_move(@board.spaces)}  
+        player.choose_move {|human| human ? View.get_move : Computer.get_move(@board.spaces)}
       end
       @board.place move
       break if @board.game_over?

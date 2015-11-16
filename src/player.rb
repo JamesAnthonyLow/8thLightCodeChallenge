@@ -3,11 +3,14 @@ class Player
     @human = human 
     @marker = nil
   end
-  def set_marker choose_marker
-    @marker = choose_marker.call
+  def set_marker &choice_bloc
+    @marker = choice_bloc.call(human?) 
   end
-  def choose_move move_decision
-    move = move_decision.call
-    Hash[:move, move, :marker, @marker]
+  def choose_move &move_decision
+    move = move_decision.call(human?)
+    [move, @marker]
+  end
+  def human?
+    @human
   end
 end
