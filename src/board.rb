@@ -32,6 +32,6 @@ class Board
     @possible_wins.any? {|line| line.all? {|idx| spaces[idx] == marker}}
   end
   def valid_move? move
-    (0..@spaces.length).to_a.include?(move) && !@spaces[move]
+    (0..@spaces.length).to_a.include?(move) && @spaces[move].nil?
   end
 end

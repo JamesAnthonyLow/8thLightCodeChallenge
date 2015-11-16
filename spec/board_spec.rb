@@ -39,6 +39,8 @@ describe Board do
         end
         expect(move).to eq Hash[:move, 0, :marker, "X"]
       end
+      xit "calls try_again if not reached on first loop" do
+      end
     end
   end
 end
