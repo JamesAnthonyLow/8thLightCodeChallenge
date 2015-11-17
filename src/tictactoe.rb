@@ -36,10 +36,10 @@ class TicTacToe
   end
   def get_player_move(player)
     until_valid? do
-      move, marker = player.choose_move do |human| 
-        human ? View.get_move : Computer.get_move(@board.spaces)
+      move, player_marker = player.choose_move do |marker, human| 
+        human ? View.get_move : Computer.get_move(marker, @board.spaces)
       end
-      break Hash[:move, move, :marker, marker] if @board.valid_move? move
+      break Hash[:move, move, :marker, player_marker] if @board.valid_move? move
     end
   end
   def until_valid?

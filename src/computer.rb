@@ -3,7 +3,7 @@ module Computer
     def choose_marker markers
       markers.sample
     end
-    def get_move spaces
+    def get_move spaces, marker
       available_moves.sort_by { |move| move_score(spaces, move) }
     end
     private
