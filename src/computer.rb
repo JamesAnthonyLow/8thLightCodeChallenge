@@ -1,17 +1,25 @@
+require_relative "board"
 module Computer
   class << self
     def choose_marker markers
       markers.sample
     end
-    def get_move spaces, marker
-      available_moves.sort_by { |move| move_score(spaces, move) }
+    def get_move marker, board
+      spaces = board.spaces
+      possible_moves(marker, spaces).sort_by {|move| move_score(move, spaces, marker)}.pop
     end
     private
-    def available_moves
-      spaces.each_index.with_object([]) {|i, poss| poss << i if spaces[i].nil? }
+    def move_score move, spaces, marker
+      possible_spaces, possible_spaces[move] = spaces.dup, marker
+      score = 0
+      Board.new(possible_spaces).possible_wins do |line|
+        score += line.count(marker) 
+        score -= line.count {|space| !space.nil? && space != marker}
+      end
+      score
     end
-    def move_score spaces, move 
-      
+    def possible_moves(marker, spaces)
+      spaces.each_index.with_object([]) {|i, poss| poss << spaces[i].nil?}
     end
   end
 end 

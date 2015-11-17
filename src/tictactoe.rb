@@ -13,7 +13,7 @@ class TicTacToe
   end
   def start_game
     @players.cycle do |player|
-      View.display_board @board.spaces
+      View.display_board @board
       @board.place get_player_move(player)
       break if @board.game_over?
     end
@@ -37,7 +37,7 @@ class TicTacToe
   def get_player_move(player)
     until_valid? do
       move, player_marker = player.choose_move do |marker, human| 
-        human ? View.get_move : Computer.get_move(marker, @board.spaces)
+        human ? View.get_move : Computer.get_move(marker, @board)
       end
       break Hash[:move, move, :marker, player_marker] if @board.valid_move? move
     end

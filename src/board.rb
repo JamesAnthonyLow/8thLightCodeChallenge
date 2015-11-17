@@ -1,11 +1,9 @@
 class Board
+  include Enumerable
   attr_reader :spaces, :win_status
-  def initialize
-    @spaces = Array.new(9)
+  def initialize spaces
+    @spaces = spaces || Array.new(9)
     @win_status = false
-    @possible_wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
-                      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-                      [0, 4, 8], [2, 4, 6]]
   end
   def game_over?
     if winner? "X"
@@ -22,11 +20,28 @@ class Board
   def place player_move = {}
     @spaces[player_move[:move]] = player_move[:marker]
   end
+  def possible_wins
+    [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+     [0, 3, 6], [1, 4, 7], [2, 5, 8],
+     [0, 4, 8], [2, 4, 6]].each {|idx| yield(@spaces[idx]) }
+  end
   private 
   def tie?
     spaces.all? ? @win_status = "Tie!" : false
   end
   def winner? marker
-    @possible_wins.any? {|line| line.all? {|idx| spaces[idx] == marker}}
+    possible_wins.any? {|line| line.all? {|space| space == marker}}
   end
 end
+
+  
+  
+  
+  
+  
+  
+  d
+  
+  
+  
+  kkdsnd
