@@ -1,5 +1,8 @@
 class View
   @@space_selectors = ("a".."i").to_a
+  @@game_choices = Hash["1", [true, true], 
+                        "2", [true, false], 
+                        "3", [false, false]]
   class << self
     def welcome
       puts "Welcome to Tic Tac Toe!"
@@ -25,9 +28,6 @@ class View
       puts "    |     |    "
     end
     def get_game_type 
-      game_choices = Hash["1", [true, true], 
-                          "2", [true, false], 
-                          "3", [false, false]]
       loop do
         puts "Please select game type:"
         puts "\t1. Human v Human"
@@ -59,6 +59,9 @@ class View
     private
     def space_selectors
       @@space_selectors
+    end
+    def game_choices
+      @@game_choices
     end
   end
 end
