@@ -14,10 +14,16 @@ class TicTacToe
   def start_game
     @players.cycle do |player|
       View.display_board @board.spaces
-      move = @board.until_valid_move?(-> { View.try_again }) do
-        player.choose_move {|human| human ? View.get_move : Computer.get_move(@board.spaces)}
+      #refactor to normal until 
+      move, marker = nil
+      while true
+        move, marker = player.choose_move do |human| 
+          human ? View.get_move : Computer.get_move(@board.spaces)
+        end
+        break if @board.valid_move? move
+        View.try_again
       end
-      @board.place move
+      @board.place Hash[:move, move, :marker, marker]
       break if @board.game_over?
     end
     View.end_game(@board.win_status)
