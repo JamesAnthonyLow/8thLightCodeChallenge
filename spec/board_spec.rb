@@ -8,15 +8,15 @@ describe Board do
   end
   describe "@win_status" do
     context "tie" do
-      xit "contains tie message as string" do
+      it "contains tie message as string" do
       end
     end
     context "player X win" do
-      xit "contains player X win message as string" do
+      it "contains player X win message as string" do
       end
     end
     context "player O win" do
-      xit "contains player O win message as string" do
+      it "contains player O win message as string" do
       end
     end
   end

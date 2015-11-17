@@ -1,18 +1,12 @@
 class Board
-  include Enumerable
   attr_reader :spaces, :win_status
   def initialize spaces = Array.new(9)
     @spaces = spaces 
-    @win_status = false
+    @win_status = nil
   end
   def game_over?
-    if winner? "X"
-      @win_status = "Player X wins!"
-    elsif winner? "O"
-      @win_status = "Player O wins!"
-    else
-      tie? 
-    end
+    winner = winner? 
+    @win_status = winner ? "Player #{winner} wins!" : tie?
   end
   def valid_move? move
     (0..@spaces.length).to_a.include?(move) && @spaces[move].nil?
