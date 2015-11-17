@@ -1,8 +1,8 @@
 class Board
   include Enumerable
   attr_reader :spaces, :win_status
-  def initialize spaces
-    @spaces = spaces || Array.new(9)
+  def initialize spaces = Array.new(9)
+    @spaces = spaces 
     @win_status = false
   end
   def game_over?
@@ -23,7 +23,9 @@ class Board
   def possible_wins
     [[0, 1, 2], [3, 4, 5], [6, 7, 8],
      [0, 3, 6], [1, 4, 7], [2, 5, 8],
-     [0, 4, 8], [2, 4, 6]].each {|idx| yield(@spaces[idx]) }
+     [0, 4, 8], [2, 4, 6]].map do |indexes| 
+       indexes.map {|idx| @spaces[idx]}
+     end
   end
   private 
   def tie?
@@ -33,15 +35,3 @@ class Board
     possible_wins.any? {|line| line.all? {|space| space == marker}}
   end
 end
-
-  
-  
-  
-  
-  
-  
-  d
-  
-  
-  
-  kkdsnd

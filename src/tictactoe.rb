@@ -13,7 +13,7 @@ class TicTacToe
   end
   def start_game
     @players.cycle do |player|
-      View.display_board @board
+      View.display_board @board.spaces
       @board.place get_player_move(player)
       break if @board.game_over?
     end
