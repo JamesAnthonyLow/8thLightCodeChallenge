@@ -1,8 +1,5 @@
 class View
   @@space_selectors = ("a".."i").to_a
-  @@game_choices = Hash["1", [true, true], 
-                        "2", [true, false], 
-                        "3", [false, false]]
   class << self
     def welcome
       puts "Welcome to Tic Tac Toe!"
@@ -27,19 +24,14 @@ class View
       puts "  #{sw} |  #{ss}  | #{se} "
       puts "    |     |    "
     end
-    def get_game_type 
-      loop do
-        puts "Please select game type:"
-        puts "\t1. Human v Human"
-        puts "\t2. Human v Computer"
-        puts "\t3. Computer v Computer"
-        input = gets.chomp
-        if game_choices[input]
-          return game_choices[input].map {|choice| yield(choice)}
-        else
-          try_again
-        end
-      end
+    def user_select_game_type 
+      puts "Please select game type:"
+      puts "\t1. Human v Human"
+      puts "\t2. Human v Computer"
+      puts "\t3. Computer v Computer"
+      Hash["1", [true, true], 
+           "2", [true, false], 
+           "3", [false, false]][gets.chomp]
     end
     def choose_marker markers
       loop do

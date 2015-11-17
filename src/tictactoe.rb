@@ -6,7 +6,7 @@ class TicTacToe
   def initialize
     @board = Board.new
     View.welcome
-    @players = View.get_game_type {|human| Player.new human}
+    @players = get_game_type.map {|human| Player.new human}
     choose_markers(@players, ["X", "O"])
   end
   def start_game
@@ -18,6 +18,13 @@ class TicTacToe
     View.end_game(@board.win_status)
   end
   private
+  def get_game_type
+    loop do
+      game_type = View.user_select_game_type
+      return game_type unless game_type.nil?
+      View.try_again
+    end
+  end
   def choose_markers(players, choices)
     players.each_with_object(choices) do |player, markers|
       player.set_marker {|human| human ? View.choose_marker(markers) : Computer.choose_marker(markers)}
