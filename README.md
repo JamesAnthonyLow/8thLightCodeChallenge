@@ -1,6 +1,7 @@
 #TicTacToe Game for Command Line Games, Inc.
 
 ##USER STORIES:
+
 1. Welcome to TicTacToe
 2. Human vs Human, Human vs Computer, Computer vs Computer
 3. LOOP 
@@ -8,7 +9,9 @@
     -Player 2 turn
 4. Player 1 WIN or Player 2 WIN or TIE
 
-##CLASSES:
+##INITIAL PSUEDOCODE:
+
+###CLASSES
 #####View
   -```#welcome``` (STDOUT: introduction statement)
   -```#get_game_type``` (STDIN: retrieve game type from user OUTPUT: an array of booleans representative of player types)
