@@ -7,7 +7,9 @@ class TicTacToe
     @board = Board.new
     View.welcome
     @players = get_game_type.map {|human| Player.new human}
-    choose_markers(@players, ["X", "O"])
+    @players.each_with_object(["X", "O"]) do |player, markers|
+      get_marker_choice(player, markers)
+    end
   end
   def start_game
     @players.cycle do |player|
@@ -19,25 +21,33 @@ class TicTacToe
   end
   private
   def get_game_type
-    loop do
+    until_valid? do
       game_type = View.user_select_game_type
-      return game_type unless game_type.nil?
-      View.try_again
+      break game_type unless game_type.nil?
     end
   end
-  def choose_markers(players, choices)
-    players.each_with_object(choices) do |player, markers|
-      player.set_marker {|human| human ? View.choose_marker(markers) : Computer.choose_marker(markers)}
+  def get_marker_choice(player, markers)
+    until_valid? do
+      marker_choice = player.set_marker do |human| 
+        human ? View.choose_marker(markers) : Computer.choose_marker(markers)
+      end
+      break marker_choice unless marker_choice.nil?
     end
   end
   def get_player_move(player)
-    loop do
+    until_valid? do
       move, marker = player.choose_move do |human| 
         human ? View.get_move : Computer.get_move(@board.spaces)
       end
-      return Hash[:move, move, :marker, marker] if @board.valid_move? move
-      View.try_again
+      break Hash[:move, move, :marker, marker] if @board.valid_move? move
     end
+  end
+  def until_valid?
+    loop do
+      result = yield
+      return result unless result.nil?
+      View.try_again 
+    end 
   end
 end
 game = TicTacToe.new

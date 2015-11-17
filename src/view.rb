@@ -34,19 +34,12 @@ class View
            "3", [false, false]][gets.chomp]
     end
     def choose_marker markers
-      loop do
         puts "Please make marker choice"
         choices = markers.each_with_index.with_object({}) do |(marker, i), chs|
           puts "\t#{i+1}. #{marker}"
           chs["#{i+1}"] = marker
-        end
-        marker_choice = gets.chomp
-        if choices[marker_choice]
-          return markers.delete(choices[marker_choice])
-        else
-          try_again
-        end
       end
+        return markers.delete(choices[gets.chomp])
     end
     private
     def space_selectors
