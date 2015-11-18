@@ -1,7 +1,7 @@
 require_relative "board"
 module Computer
   @@move_score_hash = Hash[[2, 0], -1000, #opponent wins
-                           [1, 0], -1, #leave open
+                           [1, 0], -4, #leave open
                            [1, 1], 0, #tie
                            [1, 2], 0, #tie
                            [0, 0], 0, #all empty
@@ -20,7 +20,7 @@ module Computer
     private
     def move_score move, spaces, marker
       possible_spaces, possible_spaces[move] = spaces.dup, marker
-      line_scores = Board.new(possible_spaces).possible_wins.map do |line|
+      line_scores = Board.new(spaces: possible_spaces).possible_wins.map do |line|
         mine, opponent = line.count(marker), line.count {|space| space != marker && !space.nil?}
         move_score_hash[[opponent, mine]]
       end
@@ -34,5 +34,3 @@ module Computer
     end
   end
 end 
-
-
