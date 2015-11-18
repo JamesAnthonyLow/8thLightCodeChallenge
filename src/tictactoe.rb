@@ -34,7 +34,7 @@ class TicTacToe
   end
   def get_player_move(player)
     until_valid? do
-      move_input = player.human? ? View.get_move : Computer.get_move(marker, @board.spaces)
+      move_input = player.human? ? View.get_move : Computer.get_move(player.marker, @board.spaces)
       move = player.make_move move_input
       break move if @board.valid_move? move[:move]
     end

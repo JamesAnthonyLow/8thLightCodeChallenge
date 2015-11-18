@@ -1,22 +1,33 @@
 require 'spec_helper'
 describe Player do
   let(:player) { Player.new false }
-  describe "#set_marker" do
-    it "sets marker choice based on decision proc" do
-      def choose_marker markers
-        markers.first
+  context "attributes" do
+    describe "@marker" do
+      it "is readable" do
+        player.instance_variable_set(:@marker, "O")
+        expect(player.marker).to eq player.instance_variable_get(:@marker)
       end
-      player.set_marker -> { choose_marker(["X", "O"]) } 
-      expect(player.instance_variable_get(:@marker)).to eq "X"
+      it "is writable" do
+        player.marker = "X"
+        expect(player.instance_variable_get(:@marker)).to eq "X"
+      end
+    end
+    describe "@human" do
+      context "#human?" do
+        it "is readable" do
+          expect(player.human?).to eq player.instance_variable_get(:@human)
+        end
+      end
     end
   end
-  describe "#choose_move" do
-   it "outputs hash with key value pair representative of choice and marker" do     
-     player.instance_variable_set(:@marker, "O")
-     def move_choice
-       3
-     end
-     expect(player.choose_move -> { move_choice }).to eq Hash[:move, 3, :marker, "O"]
-   end
+  context "public methods" do
+    describe "#make_move" do
+      context "given an index representing a move" do
+        it "formats data accordingly" do
+          player.marker = "X"
+          expect(player.make_move 3).to eq Hash[:move, 3, :marker, "X"]
+        end
+      end
+    end
   end
 end
