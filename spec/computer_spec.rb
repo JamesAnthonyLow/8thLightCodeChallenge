@@ -15,7 +15,7 @@ describe Computer do
         expect(outcomes.all? {|win_st| win_st == "Tie!"}).to be_truthy
       end
       it "computer never loses to random selection" do
-        outcomes = Array.new(1000).map do
+        outcomes = Array.new(9000).map do
           board = Board.new
           loop do
             computer_move = Computer.get_move("X", board.spaces)
