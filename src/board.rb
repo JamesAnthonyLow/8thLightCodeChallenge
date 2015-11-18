@@ -1,8 +1,8 @@
 class Board
   attr_reader :spaces, :win_status
-  def initialize spaces = Array.new(9)
-    @spaces = spaces 
-    @win_status = nil
+  def initialize args={} 
+    @markers = args[:markers] || ["O", "X"]
+    @spaces = args[:spaces] || Array.new(9)
   end
   def game_over?
     winner = winner? 
@@ -25,7 +25,10 @@ class Board
   def tie?
     spaces.all? ? @win_status = "Tie!" : false
   end
-  def winner? marker
-    possible_wins.any? {|line| line.all? {|space| space == marker}}
+  def winner? 
+    @markers.each do |marker|
+      return marker if possible_wins.any? {|ln| ln.all? {|sp| sp == marker}}
+    end
+    false
   end
 end

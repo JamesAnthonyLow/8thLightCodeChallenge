@@ -58,9 +58,9 @@ describe Board do
     end
     describe "#valid_move?" do
       context "valid move" do
-         it "returns true" do
-           expect(board.valid_move? 4).to be_truthy 
-         end
+        it "returns true" do
+          expect(board.valid_move? 4).to be_truthy 
+        end
       end
       context "invalid move" do
         it "returns false if space taken" do
@@ -80,5 +80,16 @@ describe Board do
         end
       end
     end
+    describe "#possible_wins" do
+      it "returns 2 dimensional array representing winning space combinations" do
+        board = Board.new(spaces: ["A", "B", "C",
+                                   "D", "E", "F",
+                                   "G", "H", "I"])
+        possible_wins = [["A", "B", "C"], ["D", "E", "F"], ["G", "H", "I"],
+                         ["A", "D", "G"], ["B", "E", "H"], ["C", "F", "I"],
+                         ["A", "E", "I"], ["C", "E", "G"]]
+        expect(board.possible_wins).to eq possible_wins
+      end
+    end
   end
- end
+end
