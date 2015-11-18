@@ -8,7 +8,7 @@ class TicTacToe
     View.welcome
     @players = get_game_type.map {|human| Player.new human}
     @players.each_with_object(["X", "O"]) do |player, markers|
-      get_marker_choice(player, markers)
+      player.marker = get_marker_choice(player.human?, markers)
     end
   end
   def start_game
@@ -26,20 +26,17 @@ class TicTacToe
       break game_type unless game_type.nil?
     end
   end
-  def get_marker_choice(player, markers)
+  def get_marker_choice human, markers
     until_valid? do
-      marker_choice = player.set_marker do |human| 
-        human ? View.choose_marker(markers) : Computer.choose_marker(markers)
-      end
+      marker_choice = human ? View.choose_marker(markers) : Computer.choose_marker(markers)
       break marker_choice unless marker_choice.nil?
     end
   end
   def get_player_move(player)
     until_valid? do
-      move, player_marker = player.choose_move do |marker, human| 
-        human ? View.get_move : Computer.get_move(marker, @board.spaces)
-      end
-      break Hash[:move, move, :marker, player_marker] if @board.valid_move? move
+      move_input = player.human? ? View.get_move : Computer.get_move(marker, @board.spaces)
+      move = player.make_move move_input
+      break move if @board.valid_move? move[:move]
     end
   end
   def until_valid?

@@ -1,19 +1,12 @@
 class Player
+  attr_accessor :marker
   def initialize human
     @human = human 
-    @marker = nil
   end
-  def set_marker &choice_bloc
-    @marker = choice_bloc.call(human?) 
-  end
-  def choose_move &move_decision
-    move = move_decision.call(marker, human?)
-    [move, @marker]
+  def make_move move_input
+    Hash[:move, move_input, :marker, marker]
   end
   def human?
     @human
-  end
-  def marker
-    @marker
   end
 end

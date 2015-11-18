@@ -9,8 +9,8 @@ class Board
     winner = winner? 
     @win_status = winner ? "Player #{winner} wins!" : tie?
   end
-  def valid_move? move
-    (0..@spaces.length).to_a.include?(move) && @spaces[move].nil?
+  def valid_move? move_idx
+    (0..@spaces.length).to_a.include?(move_idx) && @spaces[move_idx].nil?
   end
   def place player_move = {}
     @spaces[player_move[:move]] = player_move[:marker]
