@@ -1,5 +1,5 @@
-require_relative "board"
-module Computer
+require_relative "possible_wins"
+class Computer
   @@move_score_hash = Hash[[2, 0], -1000, #opponent wins
                            [1, 0], -4, #leave open
                            [1, 1], 0, #tie
@@ -13,14 +13,13 @@ module Computer
     def choose_marker markers
       markers.sample
     end
-    def get_move marker, board
-      spaces = board.spaces
+    def get_move marker, spaces
       possible_moves(marker, spaces).sort_by {|move| move_score(move, spaces, marker)}.pop
     end
     private
     def move_score move, spaces, marker
       possible_spaces, possible_spaces[move] = spaces.dup, marker
-      line_scores = Board.new(spaces: possible_spaces).possible_wins.map do |line|
+      line_scores = PossibleWins.show(possible_spaces).map do |line|
         mine, opponent = line.count(marker), line.count {|space| space != marker && !space.nil?}
         move_score_hash[[opponent, mine]]
       end
