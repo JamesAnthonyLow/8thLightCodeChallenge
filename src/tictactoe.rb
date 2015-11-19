@@ -17,7 +17,7 @@ class TicTacToe
       @board.place get_player_move(player)
       break if @board.game_over?
     end
-    View.end_game(@board.win_status)
+    View.end_game(@board.win_status, @board.spaces)
   end
   private
   def get_game_type

@@ -14,6 +14,7 @@ class Computer
       choices.keys.sample
     end
     def get_move marker, spaces
+      sleep(1.0 / (1..4).to_a.sample)
       possible_moves(marker, spaces).sort_by {|move| move_score(move, spaces, marker)}.pop
     end
     private

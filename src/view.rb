@@ -20,6 +20,7 @@ class View
       puts "Invalid selection, please try again"
     end
     def prompt_player marker
+      puts
       puts "Player #{marker} please select your space"
     end
     def get_move player, spaces
@@ -29,8 +30,10 @@ class View
         Computer.get_move(player.marker, spaces)
       end
     end
-    def end_game win_status
-      puts win_status 
+    def end_game win_status, spaces
+      puts
+      puts win_status
+      display_board spaces
     end
     def user_select_game_type 
       puts "Please select game type:"

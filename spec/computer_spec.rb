@@ -14,8 +14,9 @@ describe Computer do
         end.uniq
         expect(outcomes.all? {|win_st| win_st == "Tie!"}).to be_truthy
       end
-      it "computer never loses to random selection" do
-        outcomes = Array.new(9000).map do
+      xit "computer never loses to random selection" do
+        #stays commented out unless sleep is disabled in this method
+        outcomes = Array.new(100000).map do
           board = Board.new
           loop do
             computer_move = Computer.get_move("X", board.spaces)
