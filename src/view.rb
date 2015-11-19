@@ -17,9 +17,9 @@ class View
     def try_again
       puts "Invalid selection, please try again"
     end
-    def get_move 
-      puts "Please select your space"
-      move = gets.chomp
+    def get_move player, spaces
+      puts "Player #{player.marker} please select your space"
+      move = player.human? ? gets.chomp : Computer.get_move(player.marker, spaces)
       space_selectors.index(move)
     end
     def end_game win_status
