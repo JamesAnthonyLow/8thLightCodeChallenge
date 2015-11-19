@@ -28,13 +28,13 @@ class TicTacToe
   end
   def get_marker_choice human, markers
     until_valid? do
-      marker_choice = human ? View.choose_marker(markers) : Computer.choose_marker(markers)
+      marker_choice = View.choose_marker(human, markers)
       break marker_choice unless marker_choice.nil?
     end
   end
   def get_player_move(player)
     until_valid? do
-      move_input = player.human? ? View.get_move : Computer.get_move(player.marker, @board.spaces)
+      move_input = player.human? ? View.get_move(player.marker) : Computer.get_move(player.marker, @board.spaces)
       move = player.make_move move_input
       break move if @board.valid_move? move[:move]
     end

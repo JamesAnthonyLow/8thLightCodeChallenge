@@ -52,3 +52,7 @@
   Methods:
   -```#start_game``` (initializes board and gets input to initialize players)
 
+##REFACTOR PSEUDOCODE:
+- Need to be able to choose player order. 
+- Players are more like profiles?
+
