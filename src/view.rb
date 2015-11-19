@@ -19,8 +19,11 @@ class View
     end
     def get_move player, spaces
       puts "Player #{player.marker} please select your space"
-      move = player.human? ? gets.chomp : Computer.get_move(player.marker, spaces)
-      space_selectors.index(move)
+      if player.human?
+        space_selectors.index(gets.chomp)
+      else
+        Computer.get_move(player.marker, spaces)
+      end
     end
     def end_game win_status
       puts win_status 
@@ -43,7 +46,7 @@ class View
         puts "\t#{i+1}. #{marker}"
         chs["#{i+1}"] = marker
       end
-        markers.delete(choices[human ? gets.chomp : Computer.choose_marker(markers)])
+      markers.delete(choices[human ? gets.chomp : Computer.choose_marker(choices)])
     end
     private
     def space_selectors

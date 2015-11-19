@@ -10,8 +10,8 @@ class Computer
                            [2, 1], 3, #stop opponent
                            [0, 3], 1000] #win
   class << self
-    def choose_marker markers
-      markers.sample
+    def choose_marker choices 
+      choices.keys.sample
     end
     def get_move marker, spaces
       possible_moves(marker, spaces).sort_by {|move| move_score(move, spaces, marker)}.pop
