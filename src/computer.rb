@@ -24,7 +24,8 @@ class Computer
         mine, opponent = line.count(marker), line.count {|space| space != marker && !space.nil?}
         move_score_hash[[opponent, mine]]
       end
-      line_scores.reduce(:+)
+      center_penalty = move == 4 ? 4 : 0
+      line_scores.reduce(:+) - center_penalty
     end
     def possible_moves(marker, spaces)
       spaces.each_index.with_object([]) {|i, poss| poss << i if spaces[i].nil?}

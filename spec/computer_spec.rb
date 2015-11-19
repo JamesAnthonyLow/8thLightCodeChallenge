@@ -16,7 +16,7 @@ describe Computer do
       end
       xit "computer never loses to random selection" do
         #stays commented out unless sleep is disabled in this method
-        outcomes = Array.new(100000).map do
+        outcomes = Array.new(1000).map do
           board = Board.new
           loop do
             computer_move = Computer.get_move("X", board.spaces)
