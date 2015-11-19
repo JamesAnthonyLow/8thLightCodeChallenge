@@ -4,6 +4,8 @@ class View
   class << self
     def display_board spaces
       nw, nn, ne, ww, ce, ee, sw, ss, se = spaces.map.with_index {|space, i| space ? space : space_selectors[i]} 
+      puts
+      puts "    |     |    "
       puts "  #{nw} |  #{nn}  | #{ne} "
       puts "____|_____|____"
       puts "  #{ww} |  #{ce}  | #{ee} "
@@ -17,8 +19,10 @@ class View
     def try_again
       puts "Invalid selection, please try again"
     end
+    def prompt_player marker
+      puts "Player #{marker} please select your space"
+    end
     def get_move player, spaces
-      puts "Player #{player.marker} please select your space"
       if player.human?
         space_selectors.index(gets.chomp)
       else
@@ -28,7 +32,6 @@ class View
     def end_game win_status
       puts win_status 
     end
-
     def user_select_game_type 
       puts "Please select game type:"
       puts "\t1. Human v Human"
@@ -46,6 +49,7 @@ class View
         puts "\t#{i+1}. #{marker}"
         chs["#{i+1}"] = marker
       end
+      puts
       markers.delete(choices[human ? gets.chomp : Computer.choose_marker(choices)])
     end
     private
